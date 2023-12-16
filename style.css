@@ -107,12 +107,14 @@ body {
     align-items: flex-start;
     justify-content: center;
 }
-#hero h1,h2,h4,p{
+
+#hero h2,h4,h1,p,button{
   color: #E3E6F3;
   /*position: absolute;*/ /* Position the background text */
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
   background: rgb(0, 0, 0); /* Fallback color */
   background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  width: 100%; /* Full width */
-  padding: 20px; /* Some padding */
+  width: 70%; /* Full width */
+  padding: 10px; /* Some padding */
+  vertical-align: text-bottom;
+  transform: translateY(250px);
 }
