@@ -93,8 +93,8 @@ body {
 }
 
 #hero{
-    /*background-image: url("img/hero.jpg");*/
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("img/hero.jpg");
+    /*background-image: url("img/hero.png");*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("img/hero.png");
     height: 90vh;
     width: 100%;
     background-position: top 25% right 0;
