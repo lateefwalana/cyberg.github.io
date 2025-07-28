@@ -1,144 +1,196 @@
-@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Spartan", sans-serif;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
-/* Global Styles */
-
-h1 {
-  font-size: 50px;
-  line-height: 64px;
-  color: #222;
-}
-
-h2 {
-  font-size: 46px;
-  line-height: 54px;
-  color: #222;
-}
-
-h4 {
-  font-size: 20px;
-  color: #222;
-}
-
-h6 {
-  font-weight: 700;
-  font-size: 12px;
-}
-
-p {
-  font-size: 16px;
-  color: #465b52;
-  margin: 15px 0 20px 0;
-}
-
-.section-p1 {
-  padding: 40px 80px;
-}
-
-.section-m1 {
-  margin: 40px 0;
-}
-
 body {
-  width: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-/* Header Start */
-#header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 80px;
-    background: #E3E6F3;
-    box-shadow: 0 5px rgba(0, 0, 0, 0.06);
+:root {
+  --bg: #0f1c2e;
+  --text: #f0f4f8;
+  --accent: #33b89f;
+  --alt-bg: #182c45;
+  --card-bg: #1e334f;
 }
-#navbar{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#navbar li{
-    list-style: none;
-    padding: 0 20px;
-    position: relative;
-}
-#navbar li a{
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    color: #1a1a1a;
-    transition: 0.3s ease;
-}
-#navbar li a:hover,
-#navbar li a.active{
-    color: #088178;
-}
-#navbar li a.active::after,
-#navbar li a:hover::after{
-    content: "";
-    width: 30%;
-    height: 2px;
-    background: #088178;
-    position: absolute;
-    bottom: -4px;
-    left: 20px;
+body.light {
+  --bg: #ffffff;
+  --text: #1e1e1e;
+  --alt-bg: #f0f0f0;
+  --card-bg: #ffffff;
 }
 
-#hero{
-    /*background-image: url("img/hero.png");*/
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url("img/hero.png");
-    height: 90vh;
-    width: 100%;
-    background-position: top 10% right 0;
-     /*background-position: center;*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 0 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+/* Layout Utilities */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+.section {
+  padding: 5rem 0;
+}
+.section.alt {
+  background-color: var(--alt-bg);
+}
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--accent);
 }
 
-#hero h2,h4,h1,p{
-  color: #E3E6F3;
-  /*position: absolute;*/ /* Position the background text */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  width: 70%; /* Full width */
-  padding: 10px; /* Some padding */
-  vertical-align: text-bottom;
-  transform: translateY(240px);
+/* Header */
+header {
+  background-color: var(--alt-bg);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-/* The alert message box */
-.alert {
-  padding: 10px;
-  background-color: #465b52; /* Red */
-  color: white;
-  margin-bottom: 15px;
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-/* The close button */
-.closebtn {
-  margin-left: 15px;
-  color: white;
+.logo {
+  font-size: 1.8rem;
   font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
+  color: var(--accent);
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+nav a:hover {
+  color: var(--accent);
+}
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: color 0.3s ease;
+}
+#theme-toggle:hover {
+  color: var(--accent);
 }
 
-/* When moving the mouse over the close button */
-.closebtn:hover {
-  color: black;
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, #14243e, #21867a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 2rem;
+}
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.btn {
+  background: var(--accent);
+  color: #0f1c2e;
+  padding: 0.9rem 1.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+.btn:hover {
+  background: #2fa391;
+}
+
+/* Services Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s ease;
+}
+.card:hover {
+  transform: translateY(-10px);
+}
+.card h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.contact-form button {
+  background-color: var(--accent);
+  color: #0f1c2e;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.contact-form button:hover {
+  background-color: #2fa391;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: var(--alt-bg);
+  font-size: 0.9rem;
+  color: #aaa;
 }
