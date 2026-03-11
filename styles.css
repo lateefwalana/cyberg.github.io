@@ -1635,6 +1635,9 @@ a.contact-detail:hover .contact-detail__icon {
 }
 
 .form-success {
+  /* display is intentionally not set here so the [hidden] attribute
+     (which defaults to display:none in user-agent styles) can hide the
+     element without being overridden. */
   display: flex;
   align-items: center;
   gap: var(--space-md);
@@ -1645,6 +1648,12 @@ a.contact-detail:hover .contact-detail__icon {
   margin-top: var(--space-lg);
   color: var(--col-green);
   font-size: 0.88rem;
+}
+
+/* always hide elements that are marked hidden, even if other styles
+   attempt to change their display value */
+[hidden] {
+  display: none !important;
 }
 
 
