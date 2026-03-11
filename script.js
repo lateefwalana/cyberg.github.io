@@ -369,43 +369,47 @@ if (contactForm) {
       return;
     }
 
-    // Simulate form submission (no backend — replace with Formspree/Netlify Forms/API)
+    // Perform real submission via Formspree
     submitBtn.classList.add('is-loading');
     submitBtn.disabled = true;
 
-    /*
-     * PLACEHOLDER: Replace this timeout with your actual form submission logic.
-     * Examples:
-     *   - Formspree:   fetch('https://formspree.io/f/YOUR_ID', { method: 'POST', ... })
-     *   - Netlify:     Add `netlify` attribute to <form> tag
-     *   - EmailJS:     emailjs.sendForm(...)
-     *   - Custom API:  fetch('/api/contact', { method: 'POST', ... })
-     */
-    setTimeout(() => {
+    const formData = new FormData(contactForm);
+    const endpoint  = contactForm.getAttribute('action');
+
+    fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
       submitBtn.classList.remove('is-loading');
       submitBtn.disabled = false;
 
-      // Show success message
-      formSuccess.hidden = false;
-      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-      // Reset form
-      contactForm.reset();
-
-      // Clear any error states
-      Object.keys(validators).forEach(fieldName => {
-        const input = $(`#${fieldName}`, contactForm);
-        if (input) input.classList.remove('has-error');
-        const error = $(`#${fieldName}-error`);
-        if (error) error.textContent = '';
-      });
-
-      // Hide success message after 8 seconds
-      setTimeout(() => {
-        formSuccess.hidden = true;
-      }, 8000);
-
-    }, 1200); // Simulated network delay
+      if (response.ok) {
+        // success
+        formSuccess.hidden = false;
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        contactForm.reset();
+        Object.keys(validators).forEach(fieldName => {
+          const input = $(`#${fieldName}`, contactForm);
+          if (input) input.classList.remove('has-error');
+          const error = $(`#${fieldName}-error`);
+          if (error) error.textContent = '';
+        });
+        setTimeout(() => { formSuccess.hidden = true; }, 8000);
+      } else {
+        response.json().then(data => {
+          alert('Submission failed: ' + (data.error || 'Please try again later.'));
+        });
+      }
+    })
+    .catch(() => {
+      submitBtn.classList.remove('is-loading');
+      submitBtn.disabled = false;
+      alert('Network error – please try again later.');
+    });
 
   });
 }
